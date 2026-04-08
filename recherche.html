@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche | Mairie de Saint-Exupéry</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000091'/><text x='50%' y='50%' font-family='system-ui, sans-serif' font-weight='bold' font-size='60' fill='white' dominant-baseline='middle' text-anchor='middle'>M</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { france: { blue: '#000091', red: '#E1000F', bg: '#F6F6F6', text: '#1E1E1E' } } } } }
+    </script>
+</head>
+<body class="bg-france-bg font-sans text-france-text antialiased flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm sticky top-0 z-40 border-b-4 border-france-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-24"><a href="index.html" class="flex items-center gap-4"><div class="flex flex-col border-l-4 border-france-blue pl-3"><span class="font-black text-xl leading-none text-france-text tracking-tight uppercase">République</span><span class="font-black text-xl leading-none text-france-text tracking-tight uppercase">Française</span><div class="flex gap-1 mt-1"><span class="w-3 h-1 bg-france-blue"></span><span class="w-3 h-1 bg-white border-y border-slate-200"></span><span class="w-3 h-1 bg-france-red"></span></div></div><div class="hidden sm:flex flex-col ml-4"><span class="font-bold text-2xl text-france-blue leading-none">Mairie de</span><span class="font-black text-2xl text-france-text leading-none uppercase">Saint-Exupéry</span></div></a>
+            
+            <nav class="hidden lg:flex space-x-6 font-bold text-[15px] text-slate-700">
+                <a href="index.html" class="hover:text-france-blue transition pb-1">Accueil</a>
+                <a href="demarches.html" class="hover:text-france-blue transition pb-1">Mes Démarches</a>
+                <a href="commune.html" class="hover:text-france-blue transition pb-1">Ma Commune</a>
+                <a href="vie-quotidienne.html" class="hover:text-france-blue transition pb-1">Vie Quotidienne</a>
+                <a href="actualites.html" class="text-france-blue border-b-2 border-france-blue pb-1">Actualités</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="recherche.html" class="text-france-blue hover:bg-slate-100 p-2 rounded-full transition" aria-label="Rechercher">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </a>
+                <a href="demarches.html" class="bg-france-blue hover:bg-blue-800 text-white px-5 py-2.5 rounded-lg font-bold transition shadow-md">Mon Espace</a>
+            </div>
+
+            <button id="mobile-btn" class="lg:hidden p-2 text-france-blue"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl pb-6">
+            <div class="flex flex-col px-4 pt-4 space-y-2 font-bold text-lg text-slate-800">
+                <a href="index.html" class="p-3 hover:bg-slate-50 rounded-lg">Accueil</a>
+                <a href="demarches.html" class="p-3 hover:bg-slate-50 rounded-lg">Mes Démarches</a>
+                <a href="commune.html" class="p-3 hover:bg-slate-50 rounded-lg">Ma Commune</a>
+                <a href="vie-quotidienne.html" class="p-3 hover:bg-slate-50 rounded-lg">Vie Quotidienne</a>
+                <a href="actualites.html" class="text-france-blue bg-blue-50 p-3 rounded-lg">Actualités</a>
+                <a href="recherche.html" class="p-3 text-white bg-france-blue rounded-lg text-center mt-4 shadow-md">Rechercher</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-france-blue text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-black mb-4">Résultats de votre recherche</h1>
+            <form action="recherche.html" method="GET" class="flex bg-white rounded-lg shadow-md p-1 max-w-3xl">
+                <input type="text" name="q" id="search-input" placeholder="Nouvelle recherche..." class="w-full px-4 py-2 outline-none text-slate-800">
+                <button type="submit" class="bg-slate-900 text-white px-6 py-2 rounded-md font-bold hover:bg-slate-800 transition">Chercher</button>
+            </form>
+        </div>
+    </div>
+
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-lg text-slate-600 mb-8 border-b border-slate-200 pb-4">
+                Nous avons trouvé <strong class="text-france-blue">3 résultats</strong> pour le terme : <span id="search-term" class="font-black text-slate-900 bg-yellow-200 px-2 py-1 rounded">...</span>
+            </p>
+
+            <div class="space-y-6 max-w-4xl">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <span class="text-xs font-bold text-france-blue uppercase mb-2 block">Démarche en ligne</span>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2"><a href="demarches.html" class="hover:text-france-blue hover:underline">Accéder au service correspondant</a></h3>
+                    <p class="text-slate-600 text-sm">Retrouvez tous les formulaires et CERFA officiels liés à votre recherche directement sur notre portail citoyen dématérialisé.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <span class="text-xs font-bold text-france-red uppercase mb-2 block">Actualité Municipale</span>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2"><a href="page-type.html" class="hover:text-france-blue hover:underline">Dernières informations du Conseil</a></h3>
+                    <p class="text-slate-600 text-sm">Consultez les dernières décisions prises par le Maire et l'équipe municipale concernant ce sujet lors du dernier conseil.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <span class="text-xs font-bold text-slate-500 uppercase mb-2 block">Document à télécharger</span>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2"><a href="#" class="hover:text-france-blue hover:underline">Arrêté municipal (PDF)</a></h3>
+                    <p class="text-slate-600 text-sm">Téléchargez la documentation officielle, le plan local d'urbanisme ou le règlement intérieur au format PDF.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#1e1e1e] text-white pt-16 pb-8 border-t-4 border-france-blue mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 border-b border-slate-700 pb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex flex-col border-l-4 border-france-blue pl-3 mb-6 w-max bg-white p-4 rounded-r-lg">
+                        <span class="font-black text-lg leading-none text-france-text tracking-tight uppercase">République</span>
+                        <span class="font-black text-lg leading-none text-france-text tracking-tight uppercase">Française</span>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4">Mairie de Saint-Exupéry</h4>
+                    <p class="text-slate-400 mb-2">1 Place de l'Hôtel de Ville<br>00000 Saint-Exupéry</p>
+                    <p class="text-slate-400 font-bold text-lg mb-6">Tél : 04 00 00 00 00</p>
+                    <div class="flex gap-4">
+                        <a href="page-type.html" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-france-blue transition">fb</a>
+                        <a href="page-type.html" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-france-blue transition">tw</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-lg mb-6 text-slate-200">Horaires d'ouverture</h5>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li class="flex justify-between"><span>Lundi - Jeudi</span> <span>8h30 - 17h00</span></li>
+                        <li class="flex justify-between"><span>Vendredi</span> <span>8h30 - 16h00</span></li>
+                        <li class="flex justify-between"><span>Samedi</span> <span>9h00 - 12h00</span></li>
+                        <li class="flex justify-between text-france-red mt-2"><span>Dimanche</span> <span>Fermé</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-lg mb-6 text-slate-200">Liens utiles</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="page-type.html" class="hover:text-white transition">Service-Public.fr</a></li>
+                        <li><a href="page-type.html" class="hover:text-white transition">Payer mes factures locales</a></li>
+                        <li><a href="demarches.html" class="hover:text-white transition">Espace Citoyen</a></li>
+                        <li><a href="page-type.html" class="hover:text-white transition">Marchés Publics</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                <div class="flex flex-wrap justify-center gap-4 mb-4 md:mb-0">
+                    <a href="page-type.html" class="hover:text-white transition">Accessibilité : Totalement conforme</a>
+                    <a href="page-type.html" class="hover:text-white transition">Mentions légales</a>
+                    <a href="page-type.html" class="hover:text-white transition">Gestion des cookies</a>
+                </div>
+                <div class="flex items-center gap-2 mt-4 md:mt-0">
+                    <span>Plateforme souveraine conçue par</span>
+                    <a href="https://ton-site-studio4242.vercel.app" target="_blank" class="font-bold text-white hover:text-france-blue transition bg-slate-800 px-3 py-1 rounded-full flex items-center gap-2">
+                        <div class="w-4 h-4 bg-france-blue text-white flex items-center justify-center rounded text-[8px]">42</div> Studio 4242
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Récupère le mot tapé dans la barre d'adresse (ex: recherche.html?q=Passeport)
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        
+        // Affiche ce mot dans la page
+        if (query) {
+            document.getElementById('search-term').textContent = '"' + query + '"';
+            document.getElementById('search-input').value = query;
+        } else {
+            document.getElementById('search-term').textContent = "votre recherche";
+        }
+    </script>
+    <div class="fixed bottom-6 left-6 z-[100]">
+        <button id="a11y-btn" class="w-14 h-14 bg-france-blue text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-blue-800 transition border-2 border-white focus:outline-none focus:ring-4 focus:ring-yellow-400" aria-label="Options d'accessibilité">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        </button>
+        
+        <div id="a11y-menu" class="hidden absolute bottom-16 left-0 bg-white rounded-xl shadow-2xl border border-slate-200 p-4 w-64 mb-2">
+            <h4 class="font-bold text-slate-900 mb-3 border-b pb-2">Accessibilité</h4>
+            <div class="space-y-3">
+                <button id="btn-text-up" class="w-full text-left flex justify-between items-center text-sm font-medium text-slate-700 hover:text-france-blue p-2 rounded hover:bg-slate-50">
+                    Agrandir le texte <span class="font-black text-lg">A+</span>
+                </button>
+                <button id="btn-contrast" class="w-full text-left flex justify-between items-center text-sm font-medium text-slate-700 hover:text-france-blue p-2 rounded hover:bg-slate-50">
+                    Contraste élevé <span class="w-4 h-4 bg-black border border-white outline outline-1 outline-black rounded-full"></span>
+                </button>
+                <button id="btn-reset" class="w-full text-left text-sm font-medium text-france-red p-2 mt-2 border-t border-slate-100">
+                    Réinitialiser
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Le script Magique pour l'Accessibilité
+        const a11yBtn = document.getElementById('a11y-btn');
+        const a11yMenu = document.getElementById('a11y-menu');
+        const btnTextUp = document.getElementById('btn-text-up');
+        const btnContrast = document.getElementById('btn-contrast');
+        const btnReset = document.getElementById('btn-reset');
+        
+        // Ouvrir/Fermer le menu
+        a11yBtn.addEventListener('click', () => a11yMenu.classList.toggle('hidden'));
+
+        // Agrandir le texte
+        btnTextUp.addEventListener('click', () => {
+            document.body.classList.toggle('text-lg');
+            document.body.classList.toggle('md:text-xl');
+        });
+
+        // Mode Contraste élevé (met le fond en noir, texte en jaune)
+        btnContrast.addEventListener('click', () => {
+            document.body.classList.toggle('bg-black');
+            document.body.classList.toggle('text-yellow-400');
+            // Rend les cartes transparentes pour le mode contraste
+            document.querySelectorAll('.bg-white').forEach(el => el.classList.toggle('!bg-black'));
+            document.querySelectorAll('.text-slate-600, .text-slate-800, .text-slate-900, .text-france-text').forEach(el => el.classList.toggle('!text-yellow-400'));
+        });
+
+        // Réinitialiser
+        btnReset.addEventListener('click', () => {
+            document.body.className = 'bg-france-bg font-sans text-france-text antialiased flex flex-col min-h-screen overflow-x-hidden';
+            location.reload(); // Solution rapide pour tout remettre à zéro
+        });
+    </script>
+</body>
+</html>
